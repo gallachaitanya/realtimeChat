@@ -1,21 +1,21 @@
 import './App.css';
+import {useEffect} from 'react';
+import { connect, sendMsg } from './api';
 
 function App() {
+
+  useEffect(()=>{
+    connect();
+  },[]);
+
+  const handleClick = () => {
+    console.log("hello");
+    sendMsg("hello!");
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={handleClick}>Hit</button>
     </div>
   );
 }
