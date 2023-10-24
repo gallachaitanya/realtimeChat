@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import { connect, sendMsg } from './api';
 import Header from './components/Header/Header';
 import ChatHistory from './components/ChatHistory/ChatHistory';
+import ChatInput from './components/ChatInput/ChatInput';
 
 function App() {
   const [messages,setMessages] = useState([]);
@@ -13,16 +14,18 @@ function App() {
     });
   },[messages]);
 
-  const handleClick = () => {
-    console.log("hello");
-    sendMsg("hello!");
+  const send = (event) => {
+    if (event.keyCode === 13){
+      sendMsg(event.target.value)
+      event.target.value = ""
+    }
   }
 
   return (
     <div className="App">
     <Header />
     <ChatHistory messages={messages} />
-      <button onClick={handleClick} className='border-2 bg-blue-600 rounded-md text-white px-4 py-2 m-4'>Hit</button>
+    <ChatInput send={send} />
     </div>
   );
 }
